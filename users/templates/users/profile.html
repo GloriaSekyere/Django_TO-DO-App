@@ -1,0 +1,15 @@
+<a href="{% url 'tasks:index' %}">To-Doo-Doo</a>
+   
+        <p><img src="{{ user.profile.image.url }}"></p>
+       
+            <h2>{{ user.username }}</h2>
+            <p >{{ user.email }}</p>
+
+            <p>Hello, {{ user.username }}</p>
+            {% for task in tasks %}
+                <ul><li>{{ task }}</li></ul>
+            {% empty %}
+                <p>You have no tasks to do</p>
+            {% endfor %}
+
+            <a href="{% url 'users:logout' %}">Logout</a>
