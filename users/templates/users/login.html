@@ -1,9 +1,28 @@
+{% extends "tasks/base.html" %}
+{% load bootstrap4 %}
 
+{% block page_header %}
+    <h2>Log in to your account.</h2>
+{% endblock page_header %}
 
-<form method="POST">
+{% block content %}
+
+    <form method='post' class="form">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button name='submit'>Login</button>
-        <a href="{% url 'users:register' %}">Register</a>
+        {% bootstrap_form form %}
 
-</form>
+        {% buttons %}
+            <button name="submit" class="btn btn-primary">Log in</button>
+            <a href="{% url 'users:password_reset' %}">Forgotten Password?</a>
+        {% endbuttons %}
+        
+        
+    </form>
+
+    <div class="border-top pt-3">
+        <small class="text-muted">
+           Need an account? <a class="ml-2" href="{% url 'users:register' %}">Register</a>
+        </small>
+    </div>
+
+{% endblock content %}

@@ -1,3 +1,14 @@
-<p>You have been logged out</p>
+{% extends "tasks/base.html" %}
+{% load bootstrap4 %}
 
-<a href="{% url 'users:login' %}">Login</a>
+{% block page_header %}
+    <h3>Logged Out :(</h3>
+{% endblock page_header %}
+
+{% block content %}
+
+    <p>You have been logged out</p>
+
+    <a class="btn btn-outline-primary" href="{% url 'users:login' %}">Login</a>
+
+{% endblock content %}

@@ -1,10 +1,32 @@
-<h1>To-Doo-Doo</h1>
+{% extends "tasks/base.html" %}
 
-{% if user.is_authenticated %}
-<a href="{% url 'users:profile' user.id %}">Profile</a>
-<a href="{% url 'users:logout' %}">Logout</a>
-{% else %}
-<a href="{% url 'users:register' %}">Register</a>
-<a href="{% url 'users:login' %}">Login</a>
-{% endif %}
+{% block page_header %}
 
+    <div class="jumbotron">
+
+        <h1 class="display-5">Organize every minute, organize your life.</h1>
+
+        <p class="lead">WIth To-Do, all your daily tasks are organized in one place.
+            <br> Say goodbye to low performance!
+        </p>
+        
+        {% if user.is_authenticated %}
+        <a class="btn btn-lg btn-primary" href="{% url 'users:profile' user.id %}"
+            role="button">Profile</a>
+        {% else %}
+        <a class="btn btn-lg btn-primary" href="{% url 'users:register' %}"
+            role="button">Register</a>
+            <a class="btn btn-lg btn-primary" href="{% url 'users:login' %}"
+            role="button">Login</a>
+        {% endif %}
+        
+        
+
+    </div>
+
+{% endblock page_header %}
+
+{% block content %}
+    
+
+{% endblock content %}

@@ -1,15 +1,61 @@
-<a href="{% url 'tasks:index' %}">To-Doo-Doo</a>
-   
-        <p><img src="{{ user.profile.image.url }}"></p>
-       
-            <h2>{{ user.username }}</h2>
-            <p >{{ user.email }}</p>
+{% extends 'tasks/base.html' %})
+{% load bootstrap4 %}
 
-            <p>Hello, {{ user.username }}</p>
-            {% for task in tasks %}
-                <ul><li>{{ task }}</li></ul>
-            {% empty %}
-                <p>You have no tasks to do</p>
-            {% endfor %}
+{% block page_header %}
 
-            <a href="{% url 'users:logout' %}">Logout</a>
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img avatar" width="100px" height="100px" src="{{ user.profile.image.url }}">
+            <div class="media-body ml-3">
+                <h2 class="account-heading">{{ user.username }}</h2>
+                <p class="text-secondary">{{ user.email }}</p>
+                <a href="{% url 'users:edit_profile' %}" class="add btn btn-outline-primary font-weight-bold todo-list-add-btn" >Update Profile</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock page_header %}
+
+{% block content %}
+
+<div class="page-content page-container" id="page-content">
+    <div class="padding">
+        <div class="row container d-flex justify-content-center">
+            <div class="col-md-12">
+                <div class="card px-3">
+                    <div class="card-body">
+                        <b><p class="card-title">Add a new task:</p></b>
+                        
+                        <div > 
+                        <form method='post' width=100>
+                            {% csrf_token %}
+                            {% bootstrap_form add_form %}
+                        <div><button class="add btn btn-outline-primary " name="submit" >Add Task</button></div>
+                        </form>
+                        </div>
+                        
+                        <div class="list-wrapper pt-4">
+                            
+                            {% for task in tasks %}
+                                <div class="form-check"> <label class="form-check-label"> <input class="checkbox" type="checkbox"> 
+                                    {{ task }} 
+                                    <a class="btn btn-outline-primary ml-2 align-right" href="{% url 'tasks:edit_task' task.id %}">Edit</a>
+                                    <a  class="btn btn-outline-danger ml-2 align-right" href="{% url 'tasks:delete_task' task.id %}">Delete</a>
+                                    <i class="input-helper"></i></label> </div> <i class="remove mdi mdi-close-circle-outline"></i><br>
+                            {% empty %}
+                                    <p>You have no tasks to do</p>
+                            {% endfor %}
+                        
+                        </div>
+                        <br>
+                        <p><a class="btn btn-outline-primary" href="{% url 'users:logout' %}">Logout</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+

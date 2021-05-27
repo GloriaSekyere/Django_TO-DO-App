@@ -1,0 +1,20 @@
+{% extends "tasks/base.html" %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+    <h2>Edit your profile</h2>
+{% endblock page_header %}
+
+{% block content %}
+
+    <form method='post' class="form" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form u_form %}
+        {% bootstrap_form p_form %}
+
+        {% buttons %}
+            <button name="submit" class="btn btn-primary">Update</button>
+        {% endbuttons %}
+    </form>
+
+{% endblock content %}
